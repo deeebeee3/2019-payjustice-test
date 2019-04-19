@@ -1,5 +1,6 @@
 import React from "react";
 import FormErrors from "./FormErrors";
+import moment from 'moment';
 
 class Form extends React.Component {
   state = {
@@ -40,11 +41,21 @@ class Form extends React.Component {
     switch (fieldName) {
       case "email":
         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        fieldValidationErrors.email = emailValid ? "" : " is invalid";
+
+        fieldValidationErrors.email = emailValid ? "" : " please enter a valid email address";
         break;
       case "dob":
-        dobValid = value.length >= 6;
-        fieldValidationErrors.dob = dobValid ? "" : " is too short";
+        dobValid = value.match(/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i);
+        if(dobValid){
+            if (dobValid){
+                const years = moment(value, "DD/MM/YYYY").fromNow();
+                console.log(years)
+                fieldValidationErrors.dob = (years !== '18 years ago') ? "" : " you must be at least 18 years old";
+            }else{
+                fieldValidationErrors.dob = dobValid ? "" : " please enter a valid date";
+            }
+        }
+        
         break;
       default:
         break;
@@ -123,7 +134,7 @@ class Form extends React.Component {
           {/* <div
             className={`field ${this.errorClass(this.state.formErrors.consent)}`}
           >
-            <label htmlFor="consent">GDPR Consent - I aggree to have my data stored: </label>
+            <label htmlFor="consent">GDPR Consent - I agree to have my data stored: </label>
             <input
               type="checkbox"
               value={this.state.consent}
