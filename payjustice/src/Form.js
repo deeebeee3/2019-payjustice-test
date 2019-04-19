@@ -51,11 +51,9 @@ class Form extends React.Component {
                 const years = moment(value, "DD/MM/YYYY").fromNow();
                 console.log(years)
                 fieldValidationErrors.dob = (years !== '18 years ago') ? "" : " you must be at least 18 years old";
-            }else{
-                fieldValidationErrors.dob = dobValid ? "" : " please enter a valid date";
             }
         }
-        
+        fieldValidationErrors.dob = dobValid ? "" : " please enter a valid date";
         break;
       default:
         break;
