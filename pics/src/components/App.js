@@ -12,7 +12,12 @@ class App extends React.Component {
         Authorization:
           "Client-ID 4350aad5e239db395b9a15b70618b7adbde58196ac64bbdec7c8af1c5f0ae895"
       }
-    });
+    }).then((response) => {
+      //this callback will be invoked at some point in future with whatever data we got
+      //back from unsplash API
+
+      console.log(response.data.results);
+    })
   }
 
   render() {
