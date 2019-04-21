@@ -3,13 +3,11 @@ import React from "react";
 class SearchBar extends React.Component {
   state = { term: "" };
 
-  onFormSubmit = (event) => {
+  onFormSubmit = event => {
     event.preventDefault();
 
-    //when making use of props in a class based component we reference the props object 
-    //with this.props
     this.props.onSubmit(this.state.term);
-  }
+  };
 
   render() {
     return (
