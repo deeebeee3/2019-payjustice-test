@@ -3,9 +3,7 @@ import React from "react";
 class SearchBar extends React.Component {
   state = { term: "" };
 
-  //Fix undefined 'this' issue by using an arrow function instead of a old style functions:
-  //function onFormSubmit(){...} / onFormSubmit(){...} 
-  onFormSubmit = (event) => {
+  onFormSubmit(event) {
     event.preventDefault();
 
     console.log(this.state.term);
@@ -14,7 +12,9 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div className="ui segment">
-        <form onSubmit={this.onFormSubmit} className="ui form">
+        {/* wrap onFormSubmit callback with an arrow function and pass to onSubmit prop.
+         Add parentheses to onFormSubmit() to make sure it is invoked whenever arrow function called */}
+        <form onSubmit={(event) => this.onFormSubmit(event)} className="ui form">
           <div className="field">
             <label>Image Search</label>
             <input
