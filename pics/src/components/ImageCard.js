@@ -8,14 +8,16 @@ class ImageCard extends React.Component {
     this.imageRef = React.createRef();
   }
 
-  componentDidMount(){
-      console.log(this.imageRef);
-
-      //why is clientHeight 0 at this point?
-      //Because as soon as component is rendered not all images have been loaded.
-      //Not from the API, but from the actual image URL
-      console.log(this.imageRef.current.clientHeight);
+  componentDidMount() {
+    //listen for image load successful event
+    this.imageRef.current.addEventListener("load", this.setSpans);
   }
+
+  //use the image height to set the span for grid-row-end css
+  //context will be lost so make sure setSpan defined using an arrow function
+  setSpans = () => {
+    console.log(this.imageRef.current.clientHeight);
+  };
 
   render() {
     const { description, urls } = this.props.image;
