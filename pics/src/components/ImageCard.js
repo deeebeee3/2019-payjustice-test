@@ -10,6 +10,11 @@ class ImageCard extends React.Component {
 
   componentDidMount(){
       console.log(this.imageRef);
+
+      //why is clientHeight 0 at this point?
+      //Because as soon as component is rendered not all images have been loaded.
+      //Not from the API, but from the actual image URL
+      console.log(this.imageRef.current.clientHeight);
   }
 
   render() {
