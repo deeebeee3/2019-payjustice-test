@@ -12,9 +12,10 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div className="ui segment">
-        {/* wrap onFormSubmit callback with an arrow function and pass to onSubmit prop.
-         Add parentheses to onFormSubmit() to make sure it is invoked whenever arrow function called */}
-        <form onSubmit={(event) => this.onFormSubmit(event)} className="ui form">
+        {/* use bind to return a new version of the callback with 'this' correctly bound,
+        the binding could also be done in a constructor function:
+        this.onFormSubmit = this.onFormSubmit.bind(this) */}
+        <form onSubmit={this.onFormSubmit.bind(this)} className="ui form">
           <div className="field">
             <label>Image Search</label>
             <input
